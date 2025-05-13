@@ -17,6 +17,7 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import Image from "next/image";
 
 const features = [
   {
@@ -65,19 +66,16 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className='sticky top-0 z-50 w-full border-b border-transparent bg-[#3f3632] backdrop-blur-md'>
-      <div className='container flex h-16 items-center justify-between px-4 md:px-6'>
+    <header className='sticky top-0 z-50 w-full h-[100px] flex items-center justify-center border-b border-transparent bg-[#3f3632] opacity-85 backdrop-blur-md'>
+      <div className='container mx-auto flex h- items-center justify-between px-4 md:px-6'>
         <div className='flex items-center gap-2'>
           <Link href='/' className='flex items-center gap-2'>
-            <div className='flex h-10 w-10 items-center justify-center rounded-full bg-orange-500 text-white'>
-              <span className='text-xl font-bold'>h</span>
-            </div>
-            <span className='text-xl font-bold text-white'>Helps2</span>
+            <Image src='/log.svg' alt='Logo' width={145} height={52} />
           </Link>
         </div>
 
         {/* Desktop Navigation */}
-        <div className='hidden md:flex md:items-center md:gap-6'>
+        <div className='hidden md:flex items-center md:gap-6'>
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>

@@ -10,7 +10,7 @@ export default function Hero() {
       <div className='absolute right-0 top-1/2 h-[500px] w-[500px] -translate-y-1/2 translate-x-1/4 rounded-full border border-orange-500/20 opacity-30'></div>
       <div className='absolute right-0 top-1/2 h-[300px] w-[300px] -translate-y-1/2 translate-x-1/4 rounded-full border border-orange-500/20 opacity-30'></div>
 
-      <div className='container relative z-10 px-4 md:px-6'>
+      <div className='container mx-auto relative z-10 px-4 md:px-6'>
         <div className='grid items-center gap-6 lg:grid-cols-2 lg:gap-12'>
           <div className='flex flex-col gap-4'>
             <h1 className='text-4xl font-bold tracking-tighter text-white sm:text-5xl md:text-6xl'>

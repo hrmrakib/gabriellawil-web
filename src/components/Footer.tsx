@@ -4,18 +4,10 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className='w-full bg-[#201309] text-white'>
+    <footer className="w-full background-color-[#201309] bg-[url('/footer-bg.png')] bg-cover bg-center h-[562px] text-white">
       <div className='relative'>
-        {/* <div className='absolute top-0 left-0 h-auto'>
-          <Image src={"/footer-left.png"} width={600} height={600} alt={""} />
-        </div> */}
-
-        {/* <div className='absolute bottom-0 right-20'>
-          <Image src={"/footer-right.png"} width={800} height={900} alt={""} />
-        </div> */}
-
         <div className='container mx-auto px-4 py-12 md:px-6 md:py-16'>
-          <div className='grid gap-10 md:grid-cols-4'>
+          <div className='grid gap-10 md:grid-cols-4 pt-10'>
             {/* Logo and Social Media */}
             <div className='flex flex-col gap-6'>
               <Link href='/' className='flex items-center gap-2'>

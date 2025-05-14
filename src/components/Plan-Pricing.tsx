@@ -60,17 +60,17 @@ const plans = [
 
 export default function PlanPricing() {
   return (
-    <section className='w-full bg-[#FFF5E9] py-16 md:py-24'>
+    <section className='w-full bg-[#FFF5E9] py-16 md:py-28'>
       <div className='container mx-auto px-4 md:px-6'>
         <div className='mb-8 text-center md:mb-12'>
-          <h2 className='mb-8 text-4xl md:text-[68px] font-bold text-[#5D2F04]'>
+          <h2 className='mb-16 text-4xl md:text-[68px] font-bold text-[#5D2F04]'>
             <span className='rounded-lg bg-[#FBCE98] px-3 py-1'>Plans</span> &
             Pricing
           </h2>
           <h3 className='mb-4 text-3xl md:text-5xl font-bold text-[#5D2F04]'>
             Choose Your Growth Plan
           </h3>
-          <p className='mx-auto max-w-[600px] text-xl text-[#9D5006]/80'>
+          <p className='mb-16 mx-auto max-w-[600px] text-xl text-[#9D5006]/80'>
             Flexible plans to match your goals — whether you&apos;re just
             starting out or scaling fast
           </p>
@@ -86,7 +86,7 @@ export default function PlanPricing() {
                   : "border-[#E67E22]/20 bg-[#FFFFFF]"
               } p-6 shadow-sm`}
             >
-              <div className='mb-4 pb-5 flex items-center justify-between border-b-2 border-b-[#FBCE98]'>
+              <div className='my-5 pb-5 flex items-center justify-between border-b-2 border-b-[#FBCE98]'>
                 <div className='w-1/2'>
                   <h3
                     className={`text-2xl font-semibold pb-1.5 ${
@@ -117,7 +117,7 @@ export default function PlanPricing() {
                 </div>
               </div>
 
-              <div className='mb-6 space-y-3'>
+              <div className='my-8 space-y-4'>
                 {plan.features.map((feature, index) => (
                   <div key={index} className='flex items-start gap-2'>
                     <div
@@ -143,7 +143,7 @@ export default function PlanPricing() {
               </div>
 
               <button
-                className={`w-full rounded-lg ${
+                className={`w-full rounded-lg mb-6 ${
                   plan.highlighted
                     ? "bg-white text-[#E67E22] hover:bg-white/90"
                     : "bg-[#E67E22] text-white hover:bg-[#D35400]"

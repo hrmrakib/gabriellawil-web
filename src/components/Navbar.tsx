@@ -79,7 +79,7 @@ export default function Navbar() {
 
   return (
     <header className='sticky top-0 z-50 w-full h-[100px] flex items-center justify-center border-b border-transparent bg-linear-to-r from-[#b7753d] via-[#3e3632] to-[#6a5035] opacity-85 backdrop-blur-md'>
-      <div className='container mx-auto flex h- items-center justify-between px-4 md:px-6'>
+      <div className='container mx-auto flex h- items-center justify-between'>
         <div className='relative flex items-center gap-2'>
           <Link href='/' className='flex items-center gap-2'>
             <Image src='/log.svg' alt='Logo' width={145} height={52} />
@@ -95,8 +95,8 @@ export default function Navbar() {
             >
               <g filter='url(#filter0_f_219_4628)'>
                 <path
-                  fill-rule='evenodd'
-                  clip-rule='evenodd'
+                  fillRule='evenodd'
+                  clipRule='evenodd'
                   d='M376.325 481.019C395.391 443.969 400.829 400.872 428.41 372.345C465.871 333.599 512.795 281.123 553.345 297.926C593.907 314.733 584.028 388.816 593.259 440.652C600.408 480.796 613.538 519.465 600.282 561.495C586.432 605.41 556.541 640.478 522.604 664.673C486.548 690.378 447.482 702.765 409.848 697.261C364.402 690.615 303.52 685.72 295.1 631.402C286.598 576.559 349.174 533.78 376.325 481.019Z'
                   fill='#F7941E'
                 />
@@ -109,9 +109,9 @@ export default function Navbar() {
                   width='899.855'
                   height='992.046'
                   filterUnits='userSpaceOnUse'
-                  color-interpolation-filters='sRGB'
+                  colorInterpolationFilters='sRGB'
                 >
-                  <feFlood flood-opacity='0' result='BackgroundImageFix' />
+                  <feFlood floodOpacity='0' result='BackgroundImageFix' />
                   <feBlend
                     mode='normal'
                     in='SourceGraphic'

@@ -1,44 +1,438 @@
-import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+"use client";
+
+import type React from "react";
+
+import { useState } from "react";
+import { Sparkles } from "lucide-react";
 
 export default function AIStrategy() {
-  return (
-    <section className='w-full bg-[#FFF5E9] py-16 md:py-44'>
-      <div className='container mx-auto px-4 md:px-6'>
-        <div className='mb-20 text-center'>
-          <h2 className='text-4xl md:text-[68px] font-bold text-[#5D2F04]'>
-            <span className='rounded-lg bg-[#FBCE98] px-3 py-1'>AI</span>{" "}
-            Strategy
-          </h2>
-        </div>
+  const [formData, setFormData] = useState({
+    businessGoal: "",
+    budget: "",
+    targetAudience: "",
+    competitors: "",
+    channels: "",
+  });
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [strategy, setStrategy] = useState<string | null>(null);
 
-        <div className='flex flex-col items-center gap-8 md:flex-row md:items-center md:justify-between'>
-          <div className='flex w-full max-w-[625px] flex-col items-start gap-6'>
-            <h3 className='text-3xl md:text-5xl text-[#5D2F04] font-bold'>
-              Your AI Growth Partner
-            </h3>
-            <p className='text-xl text-[#885111]'>
-              Get keyword strategies, social media plans, and growth blueprints
-              — customized to your goals and budget
-            </p>
-            <button className='flex items-center gap-2 rounded-lg bg-[#DD7109] px-6 py-3 font-medium text-white transition-all hover:bg-[#D35400]'>
-              Explore
-              <ArrowRight className='h-5 w-5 -rotate-45' />
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsGenerating(true);
+
+    // Simulate API call with timeout
+    setTimeout(() => {
+      const generatedStrategy = generateMarketingStrategy(formData);
+      setStrategy(generatedStrategy);
+      setIsGenerating(false);
+    }, 2000);
+  };
+
+  return (
+    <div className='min-h-screen flex items-center justify-center p-4 bg-[#FAF0E6]'>
+      <div className='w-full max-w-5xl'>
+        {!strategy ? (
+          <div className='bg-[#f9f1e4] p-6 md:p-10 rounded-xl'>
+            <div className='text-center mb-8'>
+              <h1 className='text-3xl md:text-5xl font-semibold text-[#5D2F04] mb-4'>
+                Your AI-Generated Marketing Strategy
+              </h1>
+              <p className='max-w-[800px] mx-auto text-[#9D5006] text-base md:text-lg'>
+                Based on your goals, budget, and competitor landscape,
+                here&apos;s a custom roadmap to grow your traffic, visibility,
+                and conversions.
+              </p>
+            </div>
+
+            <form
+              onSubmit={handleSubmit}
+              className='space-y-6 max-w-2xl mx-auto'
+            >
+              <div className='space-y-2'>
+                <label
+                  htmlFor='businessGoal'
+                  className='block text-[#5c3a11] font-medium'
+                >
+                  Business Goal
+                </label>
+                <input
+                  type='text'
+                  id='businessGoal'
+                  name='businessGoal'
+                  value={formData.businessGoal}
+                  onChange={handleChange}
+                  placeholder='What do you want to achieve?'
+                  className='w-full p-3 bg-[#FFFFFF] border border-[#F9A94B] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#e67e22]'
+                  required
+                />
+              </div>
+
+              <div className='space-y-2'>
+                <label
+                  htmlFor='budget'
+                  className='block text-[#5c3a11] font-medium'
+                >
+                  Monthly Marketing Budget
+                </label>
+                <input
+                  type='text'
+                  id='budget'
+                  name='budget'
+                  value={formData.budget}
+                  onChange={handleChange}
+                  placeholder='Enter your estimated spend (in USD)'
+                  className='w-full p-3 bg-[#FFFFFF] border border-[#F9A94B] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#e67e22]'
+                  required
+                />
+              </div>
+
+              <div className='space-y-2'>
+                <label
+                  htmlFor='targetAudience'
+                  className='block text-[#5c3a11] font-medium'
+                >
+                  Target Audience
+                </label>
+                <input
+                  type='text'
+                  id='targetAudience'
+                  name='targetAudience'
+                  value={formData.targetAudience}
+                  onChange={handleChange}
+                  placeholder='Describe your ideal customer briefly'
+                  className='w-full p-3 bg-[#FFFFFF] border border-[#F9A94B] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#e67e22]'
+                  required
+                />
+              </div>
+
+              <div className='space-y-2'>
+                <label
+                  htmlFor='competitors'
+                  className='block text-[#5c3a11] font-medium'
+                >
+                  Main Competitor(s)
+                </label>
+                <input
+                  type='text'
+                  id='competitors'
+                  name='competitors'
+                  value={formData.competitors}
+                  onChange={handleChange}
+                  placeholder="List up to 3 competitor URLs you'd like to analyze"
+                  className='w-full p-3 bg-[#FFFFFF] border border-[#F9A94B] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#e67e22]'
+                  required
+                />
+              </div>
+
+              <div className='space-y-2'>
+                <label
+                  htmlFor='channels'
+                  className='block text-[#5c3a11] font-medium'
+                >
+                  Preferred Channels (Optional)
+                </label>
+                <input
+                  type='text'
+                  id='channels'
+                  name='channels'
+                  value={formData.channels}
+                  onChange={handleChange}
+                  placeholder='Where do you want to focus?'
+                  className='w-full p-3 bg-[#FFFFFF] border border-[#F9A94B] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#e67e22]'
+                />
+              </div>
+
+              <div className='pt-4'>
+                <button
+                  type='submit'
+                  disabled={isGenerating}
+                  className='w-full md:w-auto md:mx-auto md:px-12 flex items-center justify-center py-3 px-6 bg-[#e67e22] hover:bg-[#d35400] text-white font-medium rounded-lg transition-colors duration-200 disabled:opacity-70'
+                >
+                  {isGenerating ? (
+                    <>
+                      <svg
+                        width='28'
+                        height='28'
+                        viewBox='0 0 28 28'
+                        fill='none'
+                        xmlns='http://www.w3.org/2000/svg'
+                      >
+                        <g clip-path='url(#clip0_112_7865)'>
+                          <path
+                            d='M14.0001 1.29688C14.0393 2.93059 13.7428 4.55569 13.1275 6.07915C12.5122 7.60262 11.5902 8.99449 10.4143 10.1751C9.23845 11.3558 7.83175 12.3021 6.27477 12.9597C4.7178 13.6173 3.04113 13.9734 1.34073 14.0077'
+                            stroke='#FDDEB9'
+                            strokeWidth='2.28571'
+                            stroke-miterlimit='10'
+                            stroke-linecap='round'
+                          />
+                          <path
+                            d='M14.0001 1.29688C13.9609 2.93059 14.2574 4.55569 14.8727 6.07915C15.488 7.60262 16.4099 8.99449 17.5858 10.1751C18.7617 11.3558 20.1684 12.3021 21.7254 12.9597C23.2824 13.6173 24.959 13.9734 26.6594 14.0077'
+                            stroke='#FDDEB9'
+                            strokeWidth='2.28571'
+                            stroke-miterlimit='10'
+                            stroke-linecap='round'
+                          />
+                          <path
+                            d='M14.0001 26.7186C14.0393 25.0849 13.7428 23.4598 13.1275 21.9363C12.5122 20.4129 11.5902 19.021 10.4143 17.8403C9.23845 16.6597 7.83175 15.7134 6.27477 15.0558C4.7178 14.3981 3.04113 14.042 1.34073 14.0078'
+                            stroke='#FDDEB9'
+                            strokeWidth='2.28571'
+                            stroke-miterlimit='10'
+                            stroke-linecap='round'
+                          />
+                          <path
+                            d='M14.0001 26.7186C13.9609 25.0849 14.2574 23.4598 14.8727 21.9363C15.488 20.4129 16.4099 19.021 17.5858 17.8403C18.7617 16.6597 20.1684 15.7134 21.7254 15.0558C23.2824 14.3981 24.959 14.042 26.6594 14.0078'
+                            stroke='#FDDEB9'
+                            strokeWidth='2.28571'
+                            stroke-miterlimit='10'
+                            stroke-linecap='round'
+                          />
+                          <ellipse
+                            cx='14.0001'
+                            cy='14'
+                            rx='3.42857'
+                            ry='8'
+                            fill='#FDDEB9'
+                          />
+                          <ellipse
+                            cx='14.0001'
+                            cy='13.9989'
+                            rx='3.42857'
+                            ry='8'
+                            transform='rotate(90 14.0001 13.9989)'
+                            fill='#FDDEB9'
+                          />
+                        </g>
+                        <defs>
+                          <clipPath id='clip0_112_7865'>
+                            <rect
+                              width='27.4286'
+                              height='27.4286'
+                              fill='white'
+                              transform='translate(0.285706 0.285156)'
+                            />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                      Generating...
+                    </>
+                  ) : (
+                    <>
+                      <svg
+                        width='28'
+                        height='28'
+                        viewBox='0 0 28 28'
+                        fill='none'
+                        xmlns='http://www.w3.org/2000/svg'
+                      >
+                        <g clip-path='url(#clip0_112_7865)'>
+                          <path
+                            d='M14.0001 1.29688C14.0393 2.93059 13.7428 4.55569 13.1275 6.07915C12.5122 7.60262 11.5902 8.99449 10.4143 10.1751C9.23845 11.3558 7.83175 12.3021 6.27477 12.9597C4.7178 13.6173 3.04113 13.9734 1.34073 14.0077'
+                            stroke='#FDDEB9'
+                            strokeWidth='2.28571'
+                            stroke-miterlimit='10'
+                            stroke-linecap='round'
+                          />
+                          <path
+                            d='M14.0001 1.29688C13.9609 2.93059 14.2574 4.55569 14.8727 6.07915C15.488 7.60262 16.4099 8.99449 17.5858 10.1751C18.7617 11.3558 20.1684 12.3021 21.7254 12.9597C23.2824 13.6173 24.959 13.9734 26.6594 14.0077'
+                            stroke='#FDDEB9'
+                            strokeWidth='2.28571'
+                            stroke-miterlimit='10'
+                            stroke-linecap='round'
+                          />
+                          <path
+                            d='M14.0001 26.7186C14.0393 25.0849 13.7428 23.4598 13.1275 21.9363C12.5122 20.4129 11.5902 19.021 10.4143 17.8403C9.23845 16.6597 7.83175 15.7134 6.27477 15.0558C4.7178 14.3981 3.04113 14.042 1.34073 14.0078'
+                            stroke='#FDDEB9'
+                            strokeWidth='2.28571'
+                            stroke-miterlimit='10'
+                            stroke-linecap='round'
+                          />
+                          <path
+                            d='M14.0001 26.7186C13.9609 25.0849 14.2574 23.4598 14.8727 21.9363C15.488 20.4129 16.4099 19.021 17.5858 17.8403C18.7617 16.6597 20.1684 15.7134 21.7254 15.0558C23.2824 14.3981 24.959 14.042 26.6594 14.0078'
+                            stroke='#FDDEB9'
+                            strokeWidth='2.28571'
+                            stroke-miterlimit='10'
+                            stroke-linecap='round'
+                          />
+                          <ellipse
+                            cx='14.0001'
+                            cy='14'
+                            rx='3.42857'
+                            ry='8'
+                            fill='#FDDEB9'
+                          />
+                          <ellipse
+                            cx='14.0001'
+                            cy='13.9989'
+                            rx='3.42857'
+                            ry='8'
+                            transform='rotate(90 14.0001 13.9989)'
+                            fill='#FDDEB9'
+                          />
+                        </g>
+                        <defs>
+                          <clipPath id='clip0_112_7865'>
+                            <rect
+                              width='27.4286'
+                              height='27.4286'
+                              fill='white'
+                              transform='translate(0.285706 0.285156)'
+                            />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                      <span className='ml-2 text-[#FFFFFF] font-semibold'>
+                        {" "}
+                        Generate Strategy
+                      </span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </form>
+          </div>
+        ) : (
+          <div className='bg-white p-6 md:p-10 rounded-xl shadow-lg'>
+            <h2 className='text-2xl md:text-3xl font-bold text-[#5c3a11] mb-6'>
+              Your Marketing Strategy
+            </h2>
+            <div
+              className='prose prose-lg max-w-none'
+              dangerouslySetInnerHTML={{ __html: strategy }}
+            />
+            <button
+              onClick={() => setStrategy(null)}
+              className='mt-8 py-2 px-6 bg-[#DD7109] hover:bg-[#d35400] text-white font-medium rounded-lg transition-colors duration-200'
+            >
+              Create Another Strategy
             </button>
           </div>
-
-          <div className='relative w-full max-w-md'>
-            <Image
-              src='/AI-Strategy.png'
-              alt='Site Explorer Illustration'
-              width={500}
-              height={400}
-              className='h-auto w-full'
-              priority
-            />
-          </div>
-        </div>
+        )}
       </div>
-    </section>
+    </div>
   );
+}
+
+function generateMarketingStrategy(data: {
+  businessGoal: string;
+  budget: string;
+  targetAudience: string;
+  competitors: string;
+  channels: string;
+}) {
+  // This is a simplified strategy generator
+  // In a real application, this would likely call an AI service API
+
+  const budgetNum = Number.parseInt(data.budget.replace(/[^0-9]/g, "")) || 0;
+
+  let channelRecommendations = "";
+
+  if (budgetNum < 1000) {
+    channelRecommendations = `
+      <h3>Recommended Channels:</h3>
+      <ul>
+        <li>Social media organic content (focus on ${
+          data.channels || "Instagram and LinkedIn"
+        })</li>
+        <li>Email marketing to existing customers</li>
+        <li>Content marketing through blogging</li>
+      </ul>
+    `;
+  } else if (budgetNum < 5000) {
+    channelRecommendations = `
+      <h3>Recommended Channels:</h3>
+      <ul>
+        <li>Social media advertising (${
+          data.channels || "Facebook and Instagram"
+        }) - $${Math.round(budgetNum * 0.4)} allocation</li>
+        <li>Google Search ads - $${Math.round(budgetNum * 0.3)} allocation</li>
+        <li>Content marketing and SEO - $${Math.round(
+          budgetNum * 0.2
+        )} allocation</li>
+        <li>Email marketing automation - $${Math.round(
+          budgetNum * 0.1
+        )} allocation</li>
+      </ul>
+    `;
+  } else {
+    channelRecommendations = `
+      <h3>Recommended Channels:</h3>
+      <ul>
+        <li>Comprehensive paid media strategy across ${
+          data.channels || "Google, Meta, and LinkedIn"
+        } - $${Math.round(budgetNum * 0.5)} allocation</li>
+        <li>Content marketing and SEO - $${Math.round(
+          budgetNum * 0.2
+        )} allocation</li>
+        <li>Influencer partnerships - $${Math.round(
+          budgetNum * 0.15
+        )} allocation</li>
+        <li>Marketing automation platform - $${Math.round(
+          budgetNum * 0.1
+        )} allocation</li>
+        <li>Analytics and optimization tools - $${Math.round(
+          budgetNum * 0.05
+        )} allocation</li>
+      </ul>
+    `;
+  }
+
+  const competitorInsights = data.competitors
+    ? `
+    <h3>Competitor Analysis:</h3>
+    <p>Based on your competitors (${data.competitors}), we recommend focusing on these differentiators:</p>
+    <ul>
+      <li>Create more in-depth content addressing customer pain points</li>
+      <li>Improve website user experience and conversion optimization</li>
+      <li>Target keywords with less competition but high intent</li>
+    </ul>
+  `
+    : "";
+
+  return `
+    <div>
+      <p class="text-lg mb-4">Based on your goal to <strong>${data.businessGoal}</strong> with a monthly budget of <strong>$${budgetNum}</strong>, targeting <strong>${data.targetAudience}</strong>, we've created the following strategy:</p>
+      
+      <h3>90-Day Action Plan:</h3>
+      <ol>
+        <li>Month 1: Research and foundation building
+          <ul>
+            <li>Conduct market research on ${data.targetAudience}</li>
+            <li>Set up analytics and tracking</li>
+            <li>Develop messaging and creative assets</li>
+          </ul>
+        </li>
+        <li>Month 2: Launch and initial optimization
+          <ul>
+            <li>Launch campaigns across recommended channels</li>
+            <li>A/B test messaging and creative</li>
+            <li>Begin content marketing efforts</li>
+          </ul>
+        </li>
+        <li>Month 3: Scale what works
+          <ul>
+            <li>Analyze performance data</li>
+            <li>Double down on high-performing channels</li>
+            <li>Refine targeting based on initial results</li>
+          </ul>
+        </li>
+      </ol>
+      
+      ${channelRecommendations}
+      
+      ${competitorInsights}
+      
+      <h3>Expected Outcomes:</h3>
+      <ul>
+        <li>Increased brand visibility among ${data.targetAudience}</li>
+        <li>Growth in qualified leads and website traffic</li>
+        <li>Improved conversion rates through optimized messaging</li>
+        <li>Better ROI compared to current marketing efforts</li>
+      </ul>
+    </div>
+  `;
 }

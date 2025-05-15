@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="w-full background-color-[#201309] bg-[url('/footer-bg.png')] bg-cover bg-center h-[562px] text-white">
+    <footer className="w-full h-auto background-color-[#201309] bg-[url('/footer-bg.png')] bg-cover bg-center h-[562px] text-white">
       <div className='relative'>
         <div className='container mx-auto px-4 py-12 md:px-6 md:py-16'>
           <div className='grid gap-10 md:grid-cols-4 pt-10'>
@@ -262,7 +262,7 @@ export default function Footer() {
         </div>
 
         {/* Rocket Illustration */}
-        <div className='absolute bottom-0 left-0 w-24 md:w-44'>
+        <div className='hidden md:block absolute bottom-0 left-0 w-24 md:w-44'>
           <Image
             src='/rocket.png'
             alt='Rocket Illustration'

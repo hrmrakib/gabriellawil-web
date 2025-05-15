@@ -1,4 +1,4 @@
-import AIStrategy from "@/components/ai-strategy/AIStrategy";
+import AIStrategy from "@/components/ai-strategy/AIStrategySection";
 import ChallengesLeaderboard from "@/components/challenges-leaderboard/Challenges-Leaderboard";
 import CompetitorAnalysis from "@/components/competitor-analysis/CompetitorAnalysis";
 import Hero from "@/components/Hero";
@@ -16,7 +16,7 @@ const Home = () => {
       <CompetitorAnalysis />
       <AIStrategy />
       <ChallengesLeaderboard />
-    <PlanPricing />
+      <PlanPricing />
     </div>
   );
 };

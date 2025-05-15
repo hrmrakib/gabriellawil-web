@@ -1,331 +1,194 @@
 "use client";
 
-import { useState } from "react";
-import {
-  AreaChart,
-  Area,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell,
-} from "recharts";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import type React from "react";
 
-interface KeywordData {
-  keyword: string;
-  difficulty: number;
-  searchVolume: number;
-  trafficPotential: number;
-  globalSearchVolume: number;
-  searchTrend: { name: string; value: number }[];
-  countryBreakdown: { country: string; flag: string; percentage: number }[];
+import { useState, useRef } from "react";
+import { Sparkles, ArrowUp } from "lucide-react";
+
+interface KeywordSuggestion {
+  phrase: string;
+  type: string;
 }
 
-// Mock data for the keyword analysis
-const keywordData: KeywordData = {
-  keyword: "example keyword",
-  difficulty: 37,
-  searchVolume: 12000,
-  trafficPotential: 9500,
-  globalSearchVolume: 18500,
-  searchTrend: [
-    { name: "Jan", value: 9800 },
-    { name: "Feb", value: 10200 },
-    { name: "Mar", value: 11000 },
-    { name: "Apr", value: 10500 },
-    { name: "May", value: 9900 },
-    { name: "Jun", value: 11200 },
-    { name: "Jul", value: 12500 },
-    { name: "Aug", value: 13000 },
-    { name: "Sep", value: 12800 },
-    { name: "Oct", value: 11500 },
-    { name: "Nov", value: 10800 },
-    { name: "Dec", value: 12000 },
-  ],
-  countryBreakdown: [
-    { country: "USA", flag: "🇺🇸", percentage: 60 },
-    { country: "India", flag: "🇮🇳", percentage: 30 },
-    { country: "Sri Lanka", flag: "🇱🇰", percentage: 10 },
-  ],
-};
+export default function KeywordSuggestions() {
+  const [topic, setTopic] = useState("Sustainable fashion marketing in us");
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [suggestions, setSuggestions] = useState<KeywordSuggestion[]>([
+    { phrase: "sustainable fashion campaign ideas", type: "campaign" },
+    { phrase: "eco-conscious fashion influencers", type: "influencer" },
+    { phrase: "green marketing for clothing brands", type: "marketing" },
+  ]);
+  const [location, setLocation] = useState("United States");
+  const [showMoreSuggestions, setShowMoreSuggestions] = useState(false);
+  const [additionalSuggestions, setAdditionalSuggestions] = useState<
+    KeywordSuggestion[]
+  >([]);
 
-export default function KeywordOverview() {
-  const [data] = useState<KeywordData>(keywordData);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  // Calculate difficulty color based on the score
-  const getDifficultyColor = (score: number) => {
-    if (score < 30) return "#FFD700"; // Yellow for easy
-    if (score < 60) return "#FF8C00"; // Orange for medium
-    return "#FF4500"; // Red for hard
+  // Function to generate more keyword suggestions
+  const generateMoreSuggestions = async () => {
+    setIsGenerating(true);
+
+    try {
+      // Simulate API call delay
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+
+      // Mock additional suggestions
+      const newSuggestions: KeywordSuggestion[] = [
+        { phrase: "ethical fashion advertising strategies", type: "strategy" },
+        { phrase: "sustainable clothing brands marketing", type: "brand" },
+        {
+          phrase: "eco-friendly fashion social media campaigns",
+          type: "social",
+        },
+        { phrase: "zero waste fashion promotion", type: "promotion" },
+        { phrase: "sustainable fashion consumer trends", type: "trends" },
+      ];
+
+      setAdditionalSuggestions(newSuggestions);
+      setShowMoreSuggestions(true);
+    } catch (error) {
+      console.error("Error generating suggestions:", error);
+    } finally {
+      setIsGenerating(false);
+    }
   };
 
-  // Create gauge chart segments for difficulty
-  const difficultySegments = [
-    { value: 25, color: "#FFD700" }, // Yellow
-    { value: 25, color: "#FF8C00" }, // Orange
-    { value: 25, color: "#FF4500" }, // Red
-    { value: 25, color: "#4169E1" }, // Blue
-  ];
+  // Function to handle topic change
+  const handleTopicChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTopic(e.target.value);
+  };
 
-  // Create data for the traffic potential gauge
-  const trafficPotentialData = [
-    { name: "Potential", value: data.trafficPotential / 200 }, // Scale down for visual purposes
-    { name: "Remaining", value: 100 - data.trafficPotential / 200 }, // Remaining part of the gauge
-  ];
+  // Function to handle form submission
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Reset previous suggestions
+    setSuggestions([]);
+    setAdditionalSuggestions([]);
+    setShowMoreSuggestions(false);
+
+    // Generate new suggestions based on the topic
+    setIsGenerating(true);
+
+    // Simulate API call
+    setTimeout(() => {
+      const cleanTopic = topic.toLowerCase().trim();
+
+      // Generate mock suggestions based on the topic
+      const newSuggestions = [
+        { phrase: `${cleanTopic} campaign ideas`, type: "campaign" },
+        {
+          phrase: `eco-conscious ${cleanTopic} influencers`,
+          type: "influencer",
+        },
+        {
+          phrase: `green marketing for ${cleanTopic} brands`,
+          type: "marketing",
+        },
+      ];
+
+      setSuggestions(newSuggestions);
+      setIsGenerating(false);
+    }, 1500);
+  };
 
   return (
-    <div className='w-full bg-amber-50 py-8 px-4'>
-      <div className='max-w-6xl mx-auto'>
-        <div className='bg-white rounded-lg shadow-sm p-6'>
-          <h2 className='text-xl md:text-2xl font-semibold text-gray-800 mb-6'>
-            Overview: <span className='text-orange-500'>{data.keyword}</span>
-          </h2>
-
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4'>
-            {/* Keyword Difficulty Card */}
-            <Card>
-              <CardHeader className='pb-2'>
-                <CardTitle className='text-sm font-medium text-gray-500'>
-                  Keyword Difficulty
-                </CardTitle>
-              </CardHeader>
-              <CardContent className='pt-0'>
-                <div className='flex justify-center items-center h-[180px] relative'>
-                  <PieChart width={180} height={180}>
-                    <Pie
-                      data={difficultySegments}
-                      cx='50%'
-                      cy='50%'
-                      startAngle={180}
-                      endAngle={0}
-                      innerRadius={60}
-                      outerRadius={80}
-                      paddingAngle={0}
-                      dataKey='value'
-                    >
-                      {difficultySegments.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.color} />
-                      ))}
-                    </Pie>
-                    {/* Active segment based on difficulty score */}
-                    <Pie
-                      data={[
-                        { value: data.difficulty },
-                        { value: 100 - data.difficulty },
-                      ]}
-                      cx='50%'
-                      cy='50%'
-                      startAngle={180}
-                      endAngle={180 - (data.difficulty / 100) * 180}
-                      innerRadius={60}
-                      outerRadius={80}
-                      paddingAngle={0}
-                      dataKey='value'
-                      stroke='none'
-                    >
-                      <Cell fill={getDifficultyColor(data.difficulty)} />
-                      <Cell fill='transparent' />
-                    </Pie>
-                  </PieChart>
-                  <div className='absolute inset-0 flex items-center justify-center'>
-                    <div className='text-center bg-amber-50 rounded-full w-24 h-24 flex flex-col items-center justify-center'>
-                      <span className='text-2xl font-bold text-gray-800'>
-                        {data.difficulty}
-                      </span>
-                      <span className='text-xs text-gray-500'>/100</span>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Search Volume Card */}
-            <Card>
-              <CardHeader className='pb-2'>
-                <CardTitle className='text-sm font-medium text-gray-500'>
-                  Search Volume
-                </CardTitle>
-                <CardDescription className='text-2xl font-bold text-gray-800'>
-                  {data.searchVolume.toLocaleString()}
-                  <span className='text-xs font-normal text-gray-500 ml-1'>
-                    searches/month
-                  </span>
-                </CardDescription>
-              </CardHeader>
-              <CardContent className='pt-0'>
-                <div className='h-[120px] w-full'>
-                  <ResponsiveContainer width='100%' height='100%'>
-                    <AreaChart
-                      data={data.searchTrend}
-                      margin={{
-                        top: 5,
-                        right: 5,
-                        left: 5,
-                        bottom: 5,
-                      }}
-                    >
-                      <defs>
-                        <linearGradient
-                          id='colorVolume'
-                          x1='0'
-                          y1='0'
-                          x2='0'
-                          y2='1'
-                        >
-                          <stop
-                            offset='5%'
-                            stopColor='#FF8C00'
-                            stopOpacity={0.8}
-                          />
-                          <stop
-                            offset='95%'
-                            stopColor='#FF8C00'
-                            stopOpacity={0.1}
-                          />
-                        </linearGradient>
-                      </defs>
-                      <CartesianGrid
-                        strokeDasharray='3 3'
-                        vertical={false}
-                        opacity={0.1}
-                      />
-                      <XAxis
-                        dataKey='name'
-                        tick={{ fontSize: 10 }}
-                        axisLine={false}
-                        tickLine={false}
-                      />
-                      <YAxis
-                        hide
-                        domain={["dataMin - 1000", "dataMax + 1000"]}
-                      />
-                      <Tooltip
-                        contentStyle={{
-                          background: "white",
-                          border: "1px solid #f0f0f0",
-                          borderRadius: "8px",
-                        }}
-                        formatter={(value: number) => [
-                          `${value.toLocaleString()} searches`,
-                          "Volume",
-                        ]}
-                      />
-                      <Area
-                        type='monotone'
-                        dataKey='value'
-                        stroke='#FF8C00'
-                        strokeWidth={2}
-                        fill='url(#colorVolume)'
-                      />
-                    </AreaChart>
-                  </ResponsiveContainer>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Traffic Potential Card */}
-            <Card>
-              <CardHeader className='pb-2'>
-                <CardTitle className='text-sm font-medium text-gray-500'>
-                  Traffic Potential
-                </CardTitle>
-                <CardDescription className='text-2xl font-bold text-gray-800'>
-                  {data.trafficPotential.toLocaleString()}
-                  <span className='text-xs font-normal text-gray-500 ml-1'>
-                    visits/month
-                  </span>
-                </CardDescription>
-              </CardHeader>
-              <CardContent className='pt-0'>
-                <div className='flex justify-center items-center h-[120px]'>
-                  <PieChart width={180} height={120}>
-                    <Pie
-                      data={[{ value: 100 }]}
-                      cx='50%'
-                      cy='100%'
-                      startAngle={180}
-                      endAngle={0}
-                      innerRadius={60}
-                      outerRadius={80}
-                      paddingAngle={0}
-                      dataKey='value'
-                      stroke='none'
-                    >
-                      <Cell fill='#f1f1f1' />
-                    </Pie>
-                    <Pie
-                      data={trafficPotentialData}
-                      cx='50%'
-                      cy='100%'
-                      startAngle={180}
-                      endAngle={0}
-                      innerRadius={60}
-                      outerRadius={80}
-                      paddingAngle={0}
-                      dataKey='value'
-                      stroke='none'
-                    >
-                      <Cell fill='#FF8C00' />
-                      <Cell fill='transparent' />
-                    </Pie>
-                  </PieChart>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Global Search Volume Card */}
-            <Card>
-              <CardHeader className='pb-2'>
-                <CardTitle className='text-sm font-medium text-gray-500'>
-                  Global Search Volume
-                </CardTitle>
-                <CardDescription className='text-2xl font-bold text-gray-800'>
-                  {data.globalSearchVolume.toLocaleString()}
-                  <span className='text-xs font-normal text-gray-500 ml-1'>
-                    searches/month
-                  </span>
-                </CardDescription>
-              </CardHeader>
-              <CardContent className='pt-0'>
-                <div className='space-y-3'>
-                  {data.countryBreakdown.map((country, index) => (
-                    <div
-                      key={index}
-                      className='flex items-center justify-between'
-                    >
-                      <div className='flex items-center'>
-                        <span className='mr-2 text-lg'>{country.flag}</span>
-                        <span className='text-sm text-gray-700'>
-                          {country.country}
-                        </span>
-                      </div>
-                      <div className='flex items-center'>
-                        <div className='w-24 bg-gray-200 rounded-full h-2 mr-2'>
-                          <div
-                            className='bg-orange-500 h-2 rounded-full'
-                            style={{ width: `${country.percentage}%` }}
-                          ></div>
-                        </div>
-                        <span className='text-sm font-medium text-gray-700'>
-                          {country.percentage}%
-                        </span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+    <div className='w-full bg-amber-50 py-8 px-4 md:py-24'>
+      <div className='max-w-4xl mx-auto'>
+        {/* Search input */}
+        <form onSubmit={handleSubmit} className='mb-8'>
+          <div className='bg-amber-100 rounded-lg p-3 mb-6 inline-block'>
+            <span className='text-amber-900'>{topic}</span>
           </div>
+
+          <div className='relative'>
+            <input
+              ref={inputRef}
+              type='text'
+              value={topic}
+              onChange={handleTopicChange}
+              placeholder='Enter your topic...'
+              className='w-full p-4 pr-12 border border-amber-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400 bg-white'
+            />
+            <button
+              type='submit'
+              className='absolute right-2 top-1/2 transform -translate-y-1/2 bg-orange-500 text-white p-2 rounded-full hover:bg-orange-600 transition-colors'
+              aria-label='Search'
+            >
+              <ArrowUp className='h-5 w-5' />
+            </button>
+          </div>
+        </form>
+
+        {/* Description */}
+        <div className='mb-8'>
+          <p className='text-gray-800 text-lg mb-4'>
+            Get tailored keyword ideas from AI based on your topic. Dive into
+            potential keywords, search intent, and opportunities.
+          </p>
+          <p className='text-gray-700 mb-2'>
+            You asked about:{" "}
+            <span className='font-medium'>&quot;{topic.trim()}&quot;</span>
+          </p>
+          <p className='text-gray-700 flex items-center'>
+            Target Location: {location} <span className='ml-2 text-lg'>🇺🇸</span>
+          </p>
+        </div>
+
+        {/* Loading state */}
+        {isGenerating && !showMoreSuggestions && (
+          <div className='flex items-center justify-center py-12'>
+            <div className='animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-orange-500'></div>
+          </div>
+        )}
+
+        {/* Keyword suggestions */}
+        {suggestions.length > 0 && !isGenerating && (
+          <div className='mb-8'>
+            <ul className='list-disc pl-6 space-y-2'>
+              <li className='text-gray-800 mb-4'>
+                <p>
+                  For your topic, we&apos;ve found keyword clusters and related
+                  long-tail phrases that align with your niche and audience
+                  intent
+                </p>
+              </li>
+              {suggestions.map((suggestion, index) => (
+                <li key={index} className='text-gray-800'>
+                  {suggestion.phrase}
+                </li>
+              ))}
+
+              {showMoreSuggestions &&
+                additionalSuggestions.map((suggestion, index) => (
+                  <li key={`additional-${index}`} className='text-gray-800'>
+                    {suggestion.phrase}
+                  </li>
+                ))}
+            </ul>
+          </div>
+        )}
+
+        {/* Ask AI button */}
+        <div className='bg-white rounded-lg border border-amber-200 p-4 shadow-sm'>
+          <button
+            onClick={generateMoreSuggestions}
+            disabled={isGenerating || suggestions.length === 0}
+            className='w-full bg-amber-50 rounded-lg p-3 flex items-center gap-2 cursor-pointer hover:bg-amber-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
+          >
+            <Sparkles className='h-5 w-5 text-amber-500' />
+            <span className='text-amber-700 flex-1 text-left'>
+              Ask AI to suggest seed keywords related to your topic....
+            </span>
+            {isGenerating && showMoreSuggestions ? (
+              <div className='h-5 w-5 border-2 border-amber-500 border-t-transparent rounded-full animate-spin'></div>
+            ) : (
+              <div className='bg-orange-500 rounded-full p-1'>
+                <ArrowUp className='h-4 w-4 text-white' />
+              </div>
+            )}
+          </button>
         </div>
       </div>
     </div>

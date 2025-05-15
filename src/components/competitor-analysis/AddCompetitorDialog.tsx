@@ -7,7 +7,7 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Globe, MapPin, Building, User } from "lucide-react";
+import { Globe, MapPin, Building } from "lucide-react";
 
 type Competitor = {
   id: string;
@@ -82,9 +82,9 @@ export default function AddCompetitorDialog({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className='sm:max-w-[550px] p-0 overflow-hidden rounded-lg'>
-        <div className='bg-orange-500 py-4 px-6'>
-          <DialogTitle className='text-white text-xl font-medium'>
+      <DialogContent className='sm:max-w-[550px] p-0 overflow-hidden rounded-lg [&>button]:text-[#ffffff]'>
+        <div className='h-[80px] bg-[#DD7109] py-4 px-6 flex items-center justify-start'>
+          <DialogTitle className='text-[#FFFFFF] text-2xl font-medium'>
             Add Competitor
           </DialogTitle>
         </div>
@@ -94,18 +94,15 @@ export default function AddCompetitorDialog({
             <div className='relative'>
               <Label
                 htmlFor='name'
-                className='text-gray-600 font-medium mb-1 block'
+                className='text-[#6E7176] text-xl mb-2 block'
               >
                 Competitor Name
               </Label>
               <div className='relative'>
-                <div className='absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400'>
-                  <User size={18} />
-                </div>
                 <Input
                   id='name'
                   name='name'
-                  className='pl-10 py-3 border-gray-300 bg-gray-50 focus:ring-orange-500 focus:border-orange-500'
+                  className='h-[56px] px-2 py-3 border-[#6E7176] bg-transparent placeholder:text-[#9EA0A3] placeholder:text-lg'
                   placeholder='Enter a recognizable name...'
                   value={formData.name}
                   onChange={handleChange}
@@ -117,18 +114,15 @@ export default function AddCompetitorDialog({
             <div className='relative'>
               <Label
                 htmlFor='domain'
-                className='text-gray-600 font-medium mb-1 block'
+                className='text-[#6E7176] text-xl mb-2 block'
               >
                 Website URL
               </Label>
               <div className='relative'>
-                <div className='absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400'>
-                  <Globe size={18} />
-                </div>
                 <Input
                   id='domain'
                   name='domain'
-                  className='pl-10 py-3 border-gray-300 bg-gray-50 focus:ring-orange-500 focus:border-orange-500'
+                  className='h-[56px] px-2 py-3 border-[#6E7176] bg-transparent placeholder:text-[#9EA0A3] placeholder:text-lg'
                   placeholder='Paste the homepage URL...'
                   value={formData.domain}
                   onChange={handleChange}
@@ -140,18 +134,15 @@ export default function AddCompetitorDialog({
             <div className='relative'>
               <Label
                 htmlFor='location'
-                className='text-gray-600 font-medium mb-1 block'
+                className='text-[#6E7176] text-xl mb-2 block'
               >
                 Primary Target Location
               </Label>
               <div className='relative'>
-                <div className='absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400'>
-                  <MapPin size={18} />
-                </div>
                 <Input
                   id='location'
                   name='location'
-                  className='pl-10 py-3 border-gray-300 bg-gray-50 focus:ring-orange-500 focus:border-orange-500'
+                  className='h-[56px] px-2 py-3 border-[#6E7176] bg-transparent placeholder:text-[#9EA0A3] placeholder:text-lg'
                   placeholder='Where do they operate or rank most?'
                   value={formData.location}
                   onChange={handleChange}
@@ -162,18 +153,15 @@ export default function AddCompetitorDialog({
             <div className='relative'>
               <Label
                 htmlFor='businessType'
-                className='text-gray-600 font-medium mb-1 block'
+                className='text-[#6E7176] text-xl mb-2 block'
               >
                 Business Type (Optional)
               </Label>
               <div className='relative'>
-                <div className='absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400'>
-                  <Building size={18} />
-                </div>
                 <Input
                   id='businessType'
                   name='businessType'
-                  className='pl-10 py-3 border-gray-300 bg-gray-50 focus:ring-orange-500 focus:border-orange-500'
+                  className='h-[56px] px-2 py-3 border-[#6E7176] bg-transparent placeholder:text-[#9EA0A3] placeholder:text-lg'
                   placeholder='Select the industry or niche they operate in'
                   value={formData.businessType}
                   onChange={handleChange}
@@ -215,18 +203,18 @@ export default function AddCompetitorDialog({
             </div>
           </div>
 
-          <div className='mt-8 flex justify-end gap-3'>
+          <div className='mt-8 flex justify-center gap-3'>
             <Button
               type='button'
               variant='outline'
               onClick={onClose}
-              className='border-gray-300 text-gray-700 hover:bg-gray-50 px-6'
+              className='w-[168px] h-[52px] text-lg font-semibold border-[#DD7109] text-[#DD7109] px-6'
             >
               Cancel
             </Button>
             <Button
               type='submit'
-              className='bg-orange-500 hover:bg-orange-600 text-white px-8'
+              className='w-[168px] h-[52px] text-lg font-semibold bg-[#DD7109] border-[#DD7109] text-[#FFF] px-6'
             >
               Save
             </Button>

@@ -78,14 +78,14 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className='sticky top-0 z-50 w-full h-[100px] flex items-center justify-center border-b border-transparent bg-linear-to-r from-[#b7753d] via-[#3e3632] to-[#6a5035] opacity-85 backdrop-blur-md'>
+    <header className='sticky top-0 z-50 w-full h-[100px] flex items-center justify-center border-b border-transparent bg-linear-to-r from-[#b7753d] via-[#3e3632] to-[#6a5035] opacity-85 backdrop-blur-md px-5'>
       <div className='container mx-auto flex h- items-center justify-between'>
         <div className='relative flex items-center gap-2'>
           <Link href='/' className='flex items-center gap-2'>
             <Image src='/log.svg' alt='Logo' width={145} height={52} />
           </Link>
 
-          <div className='absolute -left-10 top-1/2 transform -translate-x-1/2 -translate-y-1/2'>
+          <div className='z-10 hidden absolute -left-10 top-1/2 transform -translate-x-1/2 -translate-y-1/2'>
             <svg
               width='901'
               height='993'
@@ -188,7 +188,7 @@ export default function Navbar() {
         <div>
           <Button
             asChild
-            className='w-[135px] h-[54px] bg-[#DD7109] text-lg text-[#FFFFFF] hover:bg-orange-600'
+            className='hidden md:flex w-[135px] h-[54px] bg-[#DD7109] text-lg text-[#FFFFFF] hover:bg-orange-600'
           >
             <Link href='/login'>Login</Link>
           </Button>
@@ -201,12 +201,12 @@ export default function Navbar() {
               <Button
                 variant='outline'
                 size='icon'
-                className='border-white text-white'
+                className='border-white bg-transparent text-white'
               >
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
-                  width='24'
-                  height='24'
+                  width='30'
+                  height='30'
                   viewBox='0 0 24 24'
                   fill='none'
                   stroke='currentColor'
@@ -224,7 +224,7 @@ export default function Navbar() {
             </SheetTrigger>
             <SheetContent
               side='right'
-              className='bg-gradient-to-r from-amber-900 to-orange-800'
+              className='bg-linear-to-r from-[#b7753d] via-[#3e3632] to-[#6a5035] opacity-85 p-6'
             >
               <div className='flex flex-col gap-6 pt-6'>
                 <Link

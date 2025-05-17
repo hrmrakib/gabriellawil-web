@@ -290,7 +290,7 @@ export default function Navbar() {
                 </Link>
                 <Button
                   asChild
-                  className='mt-4 bg-orange-500 hover:bg-orange-600'
+                  className='mt-4 bg-[#DD7109] hover:bg-[#DD7109]'
                 >
                   <Link href='/login' onClick={() => setIsOpen(false)}>
                     Login

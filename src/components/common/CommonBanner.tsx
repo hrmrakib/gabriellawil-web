@@ -52,16 +52,17 @@ export default function CommonBanner({
 
     return result;
   }
+
   return (
     <div className='relative w-full overflow-hidden bg-[url("/banner.png")] bg-cover bg-center h-[400px]'>
-      <div className='container mx-auto px-4 py-12 md:py-16 lg:py-20'>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-8 items-center'>
-          <div className='z-10'>
+      <div className='h-full w-full bg-black/40 flex items-center justify-'>
+        <div className='container mx-auto flex items-center justify-between'>
+          <div className='text-center px-4'>
             <h1 className='text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4'>
               {title}
             </h1>
             <nav aria-label='Breadcrumb'>
-              <ol className='flex items-center flex-wrap'>
+              <ol className='flex justify- items-center flex-wrap'>
                 {breadcrumbs.map((crumb, index) => (
                   <li key={index} className='flex items-center'>
                     {index > 0 && (
@@ -87,12 +88,7 @@ export default function CommonBanner({
               </ol>
             </nav>
           </div>
-          <div className='hidden md:flex justify-end'>
-            <div className='relative'>
-              <div className='absolute -top-10 -right-10 w-32 h-32 bg-amber-500 rounded-full opacity-20 blur-xl'></div>
-              <div className='absolute -bottom-5 -left-5 w-24 h-24 bg-amber-400 rounded-full opacity-20 blur-xl'></div>
-            </div>
-          </div>
+          <div className=''></div>
         </div>
       </div>
     </div>

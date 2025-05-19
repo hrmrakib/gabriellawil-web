@@ -168,7 +168,7 @@ export default function Navbar() {
                 </div>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link href='/plans' legacyBehavior passHref>
+                <Link href='/checkout' legacyBehavior passHref>
                   <NavigationMenuLink className='text-base font-medium text-white hover:text-orange-200'>
                     Plans
                   </NavigationMenuLink>

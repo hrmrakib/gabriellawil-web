@@ -47,7 +47,7 @@ const features = [
   {
     title: "Plans & Pricing",
     description: "Track your marketing performance",
-    href: "/plans-pricing",
+    href: "/checkout",
     icon: "LineChart",
   },
   {
@@ -224,7 +224,7 @@ export default function Navbar() {
             </SheetTrigger>
             <SheetContent
               side='right'
-              className='bg-linear-to-r from-[#b7753d] via-[#3e3632] to-[#6a5035] opacity-85 p-6'
+              className='bg-linear-to-r from-[#e0812d] via-[#3e3632] to-[#6a5035] opacity-85 p-6'
             >
               <div className='flex flex-col gap-6 pt-6'>
                 <Link

@@ -54,10 +54,10 @@ export default function CommonBanner({
   }
 
   return (
-    <div className='relative w-full overflow-hidden bg-[url("/banner.png")] bg-cover bg-center h-[400px]'>
-      <div className='h-full w-full bg-black/40 flex items-center justify-'>
-        <div className='container mx-auto flex items-center justify-between'>
-          <div className='text-center px-4'>
+    <div className='relative w-full overflow-hidden bg-[url("/banner2.png")] md:bg-[url("/banner.png")] bg-cover bg-center h-[400px]'>
+      <div className='h-full w-full bg-black/40 flex items-center justify-between'>
+        <div className='h-full md:h-auto container mx-auto flex flex-col md:flex-row items-center'>
+          <div className='text-center md:px-4 py-6 md:py-6'>
             <h1 className='text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4'>
               {title}
             </h1>

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export default function ChallengesLeaderboard() {
   return (
@@ -34,10 +35,10 @@ export default function ChallengesLeaderboard() {
               Complete SEO challenges, earn rewards, and climb the ranks against
               marketers worldwide
             </p>
-            <button className='flex items-center gap-2 rounded-lg bg-[#DD7109] px-6 py-3 font-medium text-white transition-all hover:bg-[#D35400]'>
+            <Link href='/challenges' className='flex items-center gap-2 rounded-lg bg-[#DD7109] px-6 py-3 font-medium text-white transition-all hover:bg-[#D35400]'>
               Explore
               <ArrowRight className='h-5 w-5 -rotate-45' />
-            </button>
+            </Link>
           </div>
         </div>
       </div>

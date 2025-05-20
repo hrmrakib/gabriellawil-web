@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export default function AIStrategySection() {
   return (
@@ -21,10 +22,10 @@ export default function AIStrategySection() {
               Get keyword strategies, social media plans, and growth blueprints
               — customized to your goals and budget
             </p>
-            <button className='flex items-center gap-2 rounded-lg bg-[#DD7109] px-6 py-3 font-medium text-white transition-all hover:bg-[#D35400]'>
+            <Link href='/ai-strategy' className='flex items-center gap-2 rounded-lg bg-[#DD7109] px-6 py-3 font-medium text-white transition-all hover:bg-[#D35400]'>
               Explore
               <ArrowRight className='h-5 w-5 -rotate-45' />
-            </button>
+            </Link>
           </div>
 
           <div className='relative w-full max-w-md'>

@@ -1,4 +1,5 @@
 import { Check } from "lucide-react";
+import Link from "next/link";
 
 const plans = [
   {
@@ -142,7 +143,8 @@ export default function PlanPricing() {
                 ))}
               </div>
 
-              <button
+              <Link
+                href='/checkout'
                 className={`w-full rounded-lg mb-6 ${
                   plan.highlighted
                     ? "bg-white text-[#E67E22] hover:bg-white/90"
@@ -150,7 +152,7 @@ export default function PlanPricing() {
                 } px-4 py-3 font-medium transition-colors`}
               >
                 Purchase Plan
-              </button>
+              </Link>
             </div>
           ))}
         </div>

@@ -153,7 +153,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href='/privacy'
+                    href='/privacy-policy'
                     className='text-lg text-[#FFFFFF] hover:text-orange-300'
                   >
                     Privacy Policy
@@ -161,7 +161,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href='/terms'
+                    href='/terms-condition'
                     className='text-lg text-[#FFFFFF] hover:text-orange-300'
                   >
                     Terms & Condition
@@ -169,7 +169,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <Link
-                    href='/trust'
+                    href='/trust-safety'
                     className='text-lg text-[#FFFFFF] hover:text-orange-300'
                   >
                     Trust & Safety

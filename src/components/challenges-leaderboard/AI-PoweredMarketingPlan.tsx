@@ -3,6 +3,7 @@
 
 import { useState } from "react";
 import MarketingPlanModal from "@/components/challenges-leaderboard/MarketingPlanModal";
+import { useRouter } from "next/navigation";
 
 export default function AIPoweredMarketingPlan() {
   const [showModal, setShowModal] = useState(false);
@@ -38,6 +39,7 @@ export default function AIPoweredMarketingPlan() {
       color: "bg-gray-200",
     },
   ]);
+  const router = useRouter();
 
   const generateNewPlan = (formData: {
     marketingChannel: string;
@@ -72,6 +74,10 @@ export default function AIPoweredMarketingPlan() {
     setShowModal(false);
   };
 
+  const handleGenerateNewPlan = () => {
+    router.push("/leaderboard/ai-powered-marketing");
+  };
+
   return (
     <div className='min-h-screen bg-[#f9f1e4] p-4 md:p-8'>
       <div className='max-w-6xl mx-auto'>
@@ -86,7 +92,7 @@ export default function AIPoweredMarketingPlan() {
           </p>
 
           <button
-            onClick={() => setShowModal(true)}
+            onClick={() => handleGenerateNewPlan()}
             className='mt-6 flex items-center justify-center mx-auto px-6 py-3 bg-[#DD7109] hover:bg-[#d35400] text-white font-medium rounded-lg transition-colors duration-200'
           >
             <svg

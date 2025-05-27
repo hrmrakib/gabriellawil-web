@@ -3,7 +3,7 @@
 import type React from "react";
 
 import { useState } from "react";
-import { Sparkles } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function AIStrategy() {
   const [formData, setFormData] = useState({
@@ -15,6 +15,7 @@ export default function AIStrategy() {
   });
   const [isGenerating, setIsGenerating] = useState(false);
   const [strategy, setStrategy] = useState<string | null>(null);
+  const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -26,11 +27,8 @@ export default function AIStrategy() {
     setIsGenerating(true);
 
     // Simulate API call with timeout
-    setTimeout(() => {
-      const generatedStrategy = generateMarketingStrategy(formData);
-      setStrategy(generatedStrategy);
-      setIsGenerating(false);
-    }, 2000);
+
+    router.push("/ai-strategy/result");
   };
 
   return (
@@ -315,124 +313,4 @@ export default function AIStrategy() {
       </div>
     </div>
   );
-}
-
-function generateMarketingStrategy(data: {
-  businessGoal: string;
-  budget: string;
-  targetAudience: string;
-  competitors: string;
-  channels: string;
-}) {
-  // This is a simplified strategy generator
-  // In a real application, this would likely call an AI service API
-
-  const budgetNum = Number.parseInt(data.budget.replace(/[^0-9]/g, "")) || 0;
-
-  let channelRecommendations = "";
-
-  if (budgetNum < 1000) {
-    channelRecommendations = `
-      <h3>Recommended Channels:</h3>
-      <ul>
-        <li>Social media organic content (focus on ${
-          data.channels || "Instagram and LinkedIn"
-        })</li>
-        <li>Email marketing to existing customers</li>
-        <li>Content marketing through blogging</li>
-      </ul>
-    `;
-  } else if (budgetNum < 5000) {
-    channelRecommendations = `
-      <h3>Recommended Channels:</h3>
-      <ul>
-        <li>Social media advertising (${
-          data.channels || "Facebook and Instagram"
-        }) - $${Math.round(budgetNum * 0.4)} allocation</li>
-        <li>Google Search ads - $${Math.round(budgetNum * 0.3)} allocation</li>
-        <li>Content marketing and SEO - $${Math.round(
-          budgetNum * 0.2
-        )} allocation</li>
-        <li>Email marketing automation - $${Math.round(
-          budgetNum * 0.1
-        )} allocation</li>
-      </ul>
-    `;
-  } else {
-    channelRecommendations = `
-      <h3>Recommended Channels:</h3>
-      <ul>
-        <li>Comprehensive paid media strategy across ${
-          data.channels || "Google, Meta, and LinkedIn"
-        } - $${Math.round(budgetNum * 0.5)} allocation</li>
-        <li>Content marketing and SEO - $${Math.round(
-          budgetNum * 0.2
-        )} allocation</li>
-        <li>Influencer partnerships - $${Math.round(
-          budgetNum * 0.15
-        )} allocation</li>
-        <li>Marketing automation platform - $${Math.round(
-          budgetNum * 0.1
-        )} allocation</li>
-        <li>Analytics and optimization tools - $${Math.round(
-          budgetNum * 0.05
-        )} allocation</li>
-      </ul>
-    `;
-  }
-
-  const competitorInsights = data.competitors
-    ? `
-    <h3>Competitor Analysis:</h3>
-    <p>Based on your competitors (${data.competitors}), we recommend focusing on these differentiators:</p>
-    <ul>
-      <li>Create more in-depth content addressing customer pain points</li>
-      <li>Improve website user experience and conversion optimization</li>
-      <li>Target keywords with less competition but high intent</li>
-    </ul>
-  `
-    : "";
-
-  return `
-    <div>
-      <p class="text-lg mb-4">Based on your goal to <strong>${data.businessGoal}</strong> with a monthly budget of <strong>$${budgetNum}</strong>, targeting <strong>${data.targetAudience}</strong>, we've created the following strategy:</p>
-      
-      <h3>90-Day Action Plan:</h3>
-      <ol>
-        <li>Month 1: Research and foundation building
-          <ul>
-            <li>Conduct market research on ${data.targetAudience}</li>
-            <li>Set up analytics and tracking</li>
-            <li>Develop messaging and creative assets</li>
-          </ul>
-        </li>
-        <li>Month 2: Launch and initial optimization
-          <ul>
-            <li>Launch campaigns across recommended channels</li>
-            <li>A/B test messaging and creative</li>
-            <li>Begin content marketing efforts</li>
-          </ul>
-        </li>
-        <li>Month 3: Scale what works
-          <ul>
-            <li>Analyze performance data</li>
-            <li>Double down on high-performing channels</li>
-            <li>Refine targeting based on initial results</li>
-          </ul>
-        </li>
-      </ol>
-      
-      ${channelRecommendations}
-      
-      ${competitorInsights}
-      
-      <h3>Expected Outcomes:</h3>
-      <ul>
-        <li>Increased brand visibility among ${data.targetAudience}</li>
-        <li>Growth in qualified leads and website traffic</li>
-        <li>Improved conversion rates through optimized messaging</li>
-        <li>Better ROI compared to current marketing efforts</li>
-      </ul>
-    </div>
-  `;
 }

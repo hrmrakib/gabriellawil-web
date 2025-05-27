@@ -4,6 +4,7 @@ import type React from "react";
 
 import { useState } from "react";
 import { ChevronDown, Sparkles } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function MarketingPlanGenerator() {
   const [formData, setFormData] = useState({
@@ -17,7 +18,7 @@ export default function MarketingPlanGenerator() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
+  const router = useRouter();
   const marketingIntensityOptions = [
     "Low - Basic marketing efforts",
     "Medium - Moderate marketing campaigns",
@@ -34,16 +35,16 @@ export default function MarketingPlanGenerator() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    // setIsSubmitting(true);
 
     // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 2000));
 
-    setIsSubmitting(false);
-    setShowSuccess(true);
+    // setIsSubmitting(false);
+    // setShowSuccess(true);
+    console.log("okkkkkkkkkkkkkkkkk");
 
+    router.push("/leaderboard/plan-overview");
     // Reset success message after 3 seconds
-    setTimeout(() => setShowSuccess(false), 3000);
   };
 
   const isFormValid = () => {
@@ -198,7 +199,7 @@ export default function MarketingPlanGenerator() {
           <div className='pt-4'>
             <button
               type='submit'
-              disabled={!isFormValid() || isSubmitting}
+              //   disabled={!isFormValid() || isSubmitting}
               className={`w-full sm:w-auto mx-auto  px-8 py-3 rounded-lg font-semibold text-white transition-all duration-200 flex items-center justify-center gap-2 ${
                 isFormValid() && !isSubmitting
                   ? "bg-orange-600 hover:bg-orange-700 focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transform hover:scale-105"
@@ -221,6 +222,7 @@ export default function MarketingPlanGenerator() {
         </form>
 
         {/* Success Message */}
+        
         {showSuccess && (
           <div className='mt-6 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg text-center'>
             <p className='font-semibold'>Success!</p>

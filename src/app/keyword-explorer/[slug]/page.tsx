@@ -18,7 +18,7 @@ export default function KeywordSuggestions() {
     { phrase: "eco-conscious fashion influencers", type: "influencer" },
     { phrase: "green marketing for clothing brands", type: "marketing" },
   ]);
-  const [location, setLocation] = useState("United States");
+  const [location] = useState("United States");
   const [showMoreSuggestions, setShowMoreSuggestions] = useState(false);
   const [additionalSuggestions, setAdditionalSuggestions] = useState<
     KeywordSuggestion[]

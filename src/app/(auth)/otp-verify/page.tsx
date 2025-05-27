@@ -91,7 +91,7 @@ export default function OtpVerificationForm() {
       } else {
         setError("Invalid OTP. Please try again.");
       }
-    } catch (error) {
+    } catch () {
       setError("An error occurred. Please try again.");
     } finally {
       setIsLoading(false);

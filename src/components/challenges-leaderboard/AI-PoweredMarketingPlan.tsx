@@ -75,7 +75,7 @@ export default function AIPoweredMarketingPlan() {
   };
 
   const handleGenerateNewPlan = () => {
-    router.push("/leaderboard/ai-powered-marketing");
+    router.push("/leaderboard/generateAiPlan");
   };
 
   return (

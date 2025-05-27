@@ -78,7 +78,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className='sticky top-0 z-50 w-full h-[100px] flex items-center justify-center border-b border-transparent bg-linear-to-r from-[#b7753d] via-[#3e3632] to-[#6a5035] opacity-85 backdrop-blur-md px-5'>
+    <header className='sticky top-0 z-50 w-full h-[65px] md:h-[100px] flex items-center justify-center border-b border-transparent bg-linear-to-r from-[#b7753d] via-[#3e3632] to-[#6a5035] opacity-85 backdrop-blur-md px-5'>
       <div className='container mx-auto flex h- items-center justify-between'>
         <div className='relative flex items-center gap-2'>
           <Link href='/' className='flex items-center gap-2'>

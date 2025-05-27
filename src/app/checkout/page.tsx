@@ -61,7 +61,7 @@ export default function CheckoutPage() {
   const [countryCode, setCountryCode] = useState("+32");
   const [discountCode, setDiscountCode] = useState("");
   const [orderData, setOrderData] = useState(initialOrderData);
-  const [discountError, setDiscountError] = useState("");
+  const [, setDiscountError] = useState("");
 
   const handleInputChange = (e: {
     target: { name: string; value: string | number };
@@ -110,7 +110,7 @@ export default function CheckoutPage() {
 
   return (
     <>
-    <CommonBanner title='Checkout' path='/checkout' />
+      <CommonBanner title='Checkout' path='/checkout' />
       <div className='min-h-screen bg-[#FAF0E6] p-4 md:p-8'>
         <div className='max-w-7xl mx-auto'>
           <form onSubmit={handleSubmit} className='z-[1000]'>

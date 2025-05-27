@@ -42,7 +42,7 @@ export default function SiteExplorer() {
   return (
     <>
       <CommonBanner title='Site Explorer' path='/site-explorer' />
-      
+
       <section className='w-full bg-[#FAF0E6] py-16 px-4'>
         <div className='max-w-5xl mx-auto text-center py-24'>
           <h1 className='text-4xl md:text-5xl font-bold text-[#5D2F04] mb-4'>
@@ -55,7 +55,7 @@ export default function SiteExplorer() {
 
           <form
             onSubmit={handleSubmit}
-            className='relative flex flex-col sm:flex-row'
+            className='relative flex flex-col sm:flex-row gap-5 md:gap-0'
           >
             <div className='relative' ref={dropdownRef}>
               <div
@@ -103,7 +103,7 @@ export default function SiteExplorer() {
               placeholder='Domain or URL.....'
               value={url}
               onChange={(e) => setUrl(e.target.value)}
-              className='flex-1 h-14 px-4 border-t border-b border-r sm:border-l-0 border-[#F9A94B] focus:outline-none focus:ring-1 focus:ring-amber-400'
+              className='flex-1 h-14 px-4 py-3 border-t border-b border-r md:border-l-0 border-[#F9A94B] focus:outline-none focus:ring-1 focus:ring-amber-400'
             />
 
             <button
